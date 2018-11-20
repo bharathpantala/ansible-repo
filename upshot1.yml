@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: Install Vim editor
+    yum: pkg=vim state=installed update_cache=yes
+  
+  - name: Install wget 
+    yum: pkg=wget state=installed update_cache=yes
+  become: true
+
+

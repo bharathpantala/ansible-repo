@@ -1,0 +1,28 @@
+---
+- hosts: webserver
+  tasks:
+    - name: Copy repo nginx
+      copy:
+        src: /home/bharath/ansible1/files/nginx.repo
+        dest: /etc/yum.repos.d/nginx.repo
+      become: yes
+
+    - name: Install nginx webserver
+      yum: name=nginx state=installed update_cache=true
+      become: yes
+
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+      become: yes
+
+    - name: copy the content of the web site
+      copy:
+        src: /home/bharath/ansible1/infotern/
+        dest: /usr/share/nginx/html
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+      become: yes
